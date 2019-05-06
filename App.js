@@ -1,22 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import math from "mathjs";
-
-class CalculatorButton extends React.Component {
-  constructor(props){
-    super(props);
-    console.log(props);
-    this.onPress = props.onPress;
-  }
-
-  render(){
-    return (
-      <TouchableOpacity style={styles.button} onPress = {this.onPress}>
-        <Text style = {styles.buttonText}>{this.props.text}</Text>
-      </TouchableOpacity>
-    );
-  }
-}
+import CalculatorButton from './components/CalculatorButton';
 
 export default class Calculator extends React.Component {
   constructor(props){
@@ -102,20 +87,11 @@ export default class Calculator extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: StatusBar.currentHeight
   },
   row: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
-  button: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  buttonText: {
-    textAlign: "center",
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold"
-  }
 });
