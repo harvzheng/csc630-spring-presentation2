@@ -41,6 +41,25 @@ export default class Calculator extends React.Component {
     ))
   }
 
+  generateCalculator(){
+    let calculator = []
+    let labels = ["7", "8", "9", "4", "5", "6", "1", "2", "3", ".", "0", "DEL"]
+
+    for (let i = 0; i < 4; i++) {
+      let buttons = [];
+
+      for (let j = 0; j < 3; j++) {
+        let label = labels[i * 3 + j];
+        if(label == "DEL") buttons.push(<CalculatorButton key = {i * 3 + j} text = "DEL" onPress = {() => {this.deleteChar()}}></CalculatorButton>)
+        else buttons.push(<CalculatorButton key = {i * 3 + j} text = {label} onPress = {() => {this.updateDisplay(label)}}></CalculatorButton>)
+      }
+
+      calculator.push(<View key = {"row-" + i} style = {styles.row}>{buttons}</View>)
+    }
+
+    return calculator
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -50,26 +69,7 @@ export default class Calculator extends React.Component {
         </View>
         <View style = {{flex: 4, backgroundColor: "#2e3131", flexDirection: "row"}}>
           <View style = {{flex: 3}}>
-            <View style = {styles.row}>
-              <CalculatorButton text = "7" onPress = {() => {this.updateDisplay("7")}}></CalculatorButton>
-              <CalculatorButton text = "8" onPress = {() => {this.updateDisplay("8")}}></CalculatorButton>
-              <CalculatorButton text = "9" onPress = {() => {this.updateDisplay("9")}}></CalculatorButton>
-            </View>
-            <View style = {styles.row}>
-              <CalculatorButton text = "4" onPress = {() => {this.updateDisplay("4")}}></CalculatorButton>
-              <CalculatorButton text = "5" onPress = {() => {this.updateDisplay("5")}}></CalculatorButton>
-              <CalculatorButton text = "6" onPress = {() => {this.updateDisplay("6")}}></CalculatorButton>
-            </View>
-            <View style = {styles.row}>
-              <CalculatorButton text = "1" onPress = {() => {this.updateDisplay("1")}}></CalculatorButton>
-              <CalculatorButton text = "2" onPress = {() => {this.updateDisplay("2")}}></CalculatorButton>
-              <CalculatorButton text = "3" onPress = {() => {this.updateDisplay("3")}}></CalculatorButton>
-            </View>
-            <View style = {styles.row}>
-              <CalculatorButton text = "." onPress = {() => {this.updateDisplay(".")}}></CalculatorButton>
-              <CalculatorButton text = "0" onPress = {() => {this.updateDisplay("0")}}></CalculatorButton>
-              <CalculatorButton text = "DEL" onPress = {() => {this.deleteChar()}}></CalculatorButton>
-            </View>
+            {this.generateCalculator()}
           </View>
           <View style = {{flex: 1, backgroundColor: "#736598", flexDirection: "column"}}>
             <CalculatorButton text = "÷" onPress = {() => {this.updateDisplay("÷")}}></CalculatorButton>

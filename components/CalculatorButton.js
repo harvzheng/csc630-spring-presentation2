@@ -4,7 +4,6 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 class CalculatorButton extends React.Component {
   constructor(props){
     super(props);
-    console.log(props);
     this.onPress = props.onPress;
   }
 
